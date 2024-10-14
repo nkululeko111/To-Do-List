@@ -8,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+email: any;
+password: any;
+errorMessage: any;
+onLogin() {
+throw new Error('Method not implemented.');
+}
 
 }
