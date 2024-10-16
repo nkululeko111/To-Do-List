@@ -96,7 +96,3 @@ User login email and todo list entries are stored in local storage for persisten
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to adjust any sections to better suit your project's specifics or add more details as needed!
