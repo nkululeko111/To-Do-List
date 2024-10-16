@@ -5,7 +5,6 @@ import { RegistrationComponent } from './registration/registration.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { AuthGuard } from './auth.guard';
 
-
 export const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
