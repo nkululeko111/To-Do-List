@@ -1,1 +1,15 @@
-<p>todo-list works!</p>
+<div>
+    <h2>Your Todo List</h2>
+    <form (ngSubmit)="addTask()">
+      <input [(ngModel)]="task" name="task" placeholder="New task" required>
+      <input type="date" [(ngModel)]="dueDate" name="dueDate" required>
+      <button type="submit">Add Task</button>
+    </form>
+    <ul>
+      <li *ngFor="let task of tasks" [class.overdue]="isOverdue(task)">
+        {{ task.name }} - {{ task.dueDate }}
+        <button (click)="removeTask(task)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  
