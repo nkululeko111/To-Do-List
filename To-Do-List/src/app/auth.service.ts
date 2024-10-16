@@ -10,11 +10,17 @@ interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  private users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+  private users: User[] = [];
   private isAuthenticated = false;
 
+  constructor() {
+    if (typeof localStorage !== 'undefined') {
+      this.users = JSON.parse(localStorage.getItem('users') || '[]');
+    }
+  }
+
   login(email: string, password: string): boolean {
-    const user = this.users.find((u: User) => u.email === email && u.password === password);
+    const user = this.users.find(u => u.email === email && u.password === password);
     if (user) {
       this.isAuthenticated = true;
       return true;
@@ -24,13 +30,15 @@ export class AuthService {
   }
 
   register(name: string, email: string, password: string): boolean {
-    const userExists = this.users.some((u: User) => u.email === email);
+    const userExists = this.users.some(u => u.email === email);
     if (userExists) {
       return false;
     } else {
       const newUser: User = { name, email, password };
       this.users.push(newUser);
-      localStorage.setItem('users', JSON.stringify(this.users));
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('users', JSON.stringify(this.users));
+      }
       return true;
     }
   }
