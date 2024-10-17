@@ -23,6 +23,7 @@ export class AuthService {
     const user = this.users.find(u => u.email === email && u.password === password);
     if (user) {
       this.isAuthenticated = true;
+      localStorage.setItem('currentUser', JSON.stringify(user));
       return true;
     } else {
       return false;

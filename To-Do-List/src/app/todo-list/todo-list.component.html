@@ -1,15 +1,23 @@
 <div>
-    <h2>Your Todo List</h2>
-    <form (ngSubmit)="addTask()">
-      <input [(ngModel)]="task" name="task" placeholder="New task" required>
-      <input type="date" [(ngModel)]="dueDate" name="dueDate" required>
-      <button type="submit">Add Task</button>
-    </form>
-    <ul>
-      <li *ngFor="let task of tasks" [class.overdue]="isOverdue(task)">
-        {{ task.name }} - {{ task.dueDate }}
-        <button (click)="removeTask(task)">Delete</button>
-      </li>
-    </ul>
-  </div>
-  
+  <h2>My Todo List</h2>
+  <form (ngSubmit)="addTask()">
+    <input [(ngModel)]="task" name="task" placeholder="New task" required>
+    <input type="date" [(ngModel)]="dueDate" name="dueDate" required>
+    <select [(ngModel)]="priority" name="priority" required>
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+    </select>
+    <button type="submit">Add Task</button>
+  </form>
+  <ul>
+    <li *ngFor="let task of tasks" [class.overdue]="isOverdue(task)">
+      {{ task.name }} - {{ task.dueDate }} - <span [ngStyle]="{'color': getPriorityColor(task.priority)}">{{ task.priority }}</span>
+      <button (click)="removeTask(task)">Delete</button>
+    </li>
+  </ul>
+  <a href="../login/"> 
+    <button>LogOut</button>
+  </a>
+</div>
+

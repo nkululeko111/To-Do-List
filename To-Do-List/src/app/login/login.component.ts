@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
   imports: [CommonModule, FormsModule, MatInputModule, MatFormFieldModule, MatButtonModule]
 })
 export class LoginComponent {
-
   email: string = '';
   password: string = '';
 
@@ -23,9 +22,10 @@ export class LoginComponent {
 
   onLogin() {
     if (this.authService.login(this.email, this.password)) {
+      alert('Login successful!');
       this.router.navigate(['/todo-list']);
     } else {
-      alert('Invalid credentials');
+      alert('Invalid credentials. Please try again.');
     }
   }
 }

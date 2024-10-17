@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 interface Task {
   name: string;
   dueDate: string;
+  priority: string;
   completed: boolean;
 }
 
@@ -19,18 +20,22 @@ export class TodoListComponent implements OnInit {
   tasks: Task[] = [];
   task: string = '';
   dueDate: string = '';
+  priority: string = 'Medium';
 
   ngOnInit(): void {
     this.loadTasks();
   }
 
   addTask() {
-    if (this.task && this.dueDate) {
-      const newTask: Task = { name: this.task, dueDate: this.dueDate, completed: false };
+    if (this.task && this.dueDate && this.priority) {
+      const newTask: Task = { name: this.task, dueDate: this.dueDate, priority: this.priority, completed: false };
       this.tasks.push(newTask);
       this.saveTasks();
+      this.task = '';
+      this.dueDate = '';
+      this.priority = 'Medium';
     } else {
-      alert('Task name and due date are required');
+      alert('Task name, due date and priority are required');
     }
   }
 
@@ -53,5 +58,18 @@ export class TodoListComponent implements OnInit {
   isOverdue(task: Task): boolean {
     const today = new Date().toISOString().split('T')[0];
     return task.dueDate < today;
+  }
+
+  getPriorityColor(priority: string): string {
+    switch (priority) {
+      case 'High':
+        return 'red';
+      case 'Medium':
+        return 'orange';
+      case 'Low':
+        return 'green';
+      default:
+        return 'black';
+    }
   }
 }
